@@ -1,6 +1,4 @@
-Based on the information you've provided, here's a revised `README.md` file for your Flask application:
-
-```markdown
+markdown
 # Diabetes Prediction Web App
 
 This repository contains a Flask web application that uses a machine learning model to predict the likelihood of a patient having diabetes based on various health indicators.
