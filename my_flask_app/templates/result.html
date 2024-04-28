@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction Result</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #6a5acd; /* SlateBlue */
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 16px;
+            color: #555;
+        }
+        .result {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .positive {
+            color: #e74c3c; /* softer red */
+        }
+        .negative {
+            color: #2ecc71; /* softer green */
+        }
+    </style>
+</head>
+<body>
+    <h1>Diabetes Prediction Result</h1>
+    <p>This diagnosis indicates whether someone has diabetes. A value of <span class="negative">0</span> means they don't have diabetes, while a value of <span class="positive">1</span> means they do.</p>
+    <div class="result">
+        <p>The predicted diabetes diagnosis is: <span class="{{ prediction | ternary:'positive','negative' }}">{{ prediction }}</span></p>
+    </div>
+</body>
+</html>

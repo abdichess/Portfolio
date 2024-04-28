@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Diabetes Prediction</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            background-color: #e8f4f8;
+            color: #333;
+        }
+        h1 {
+            color: #20639B;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #fff;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #BEE3F8;
+            color: #333;
+        }
+        form {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        input[type="number"], input[type="text"], input[type="float"], input[type="int"] {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+        input[type="number"]:focus, input[type="text"]:focus, input[type="float"]:focus, input[type="int"]:focus {
+            outline: none;
+            border-color: #20639B;
+        }
+        button[type="submit"] {
+            background-color: #20639B;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        button[type="submit"]:hover {
+            background-color: #3CAEA3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interpreting the Features of the Dataset</h1>
+    <p>Below is an explanation of the features present in the dataset:</p>
+
+    <table>
+        <tr>
+            <th>Feature</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Age</td>
+            <td>The age of the patient in years. This is a continuous variable that can range from a very young age to an old age.</td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td>The gender of the patient. This is a binary variable where <code>0</code> represents female and <code>1</code> represents male.</td>
+        </tr>
+        <tr>
+            <td>BMI</td>
+            <td>Body Mass Index (BMI) is a measure of body fat based on height and weight that applies to adult men and women. It is used as an indicator of health risk. BMI can range from very underweight (BMI less than 18.5) to very overweight (BMI more than 24.9).</td>
+        </tr>
+        <tr>
+            <td>Blood Glucose (mg/dL)</td>
+            <td>This is a measure of the average blood sugar level in the patient. Normal fasting blood glucose levels are typically less than 100 mg/dL for adults.</td>
+        </tr>
+        <tr>
+            <td>HbA1c (%)</td>
+            <td>Hemoglobin A1c is a blood test that provides an approximation of average blood glucose levels in the past 2 to 3 months. A normal level is typically less than 5.7%.</td>
+        </tr>
+        <tr>
+            <td>Systolic BP (mmHg)</td>
+            <td>Systolic blood pressure is the top number in a blood pressure reading. A normal systolic blood pressure ranges from 90 to 120 mmHg.</td>
+        </tr>
+        <tr>
+            <td>Diastolic BP (mmHg)</td>
+            <td>Diastolic blood pressure is the bottom number in a blood pressure reading. A normal diastolic blood pressure ranges from 60 to 80 mmHg.</td>
+        </tr>
+        <tr>
+            <td>Family History of Diabetes</td>
+            <td>This is a count of family members with diabetes. A value of <code>-1</code> suggests that no family history is available, while <code>0</code> indicates no family member has diabetes, and values from <code>1</code> to <code>10</code> represent the number of family members with diabetes.</td>
+        </tr>
+        <tr>
+            <td>Physical Activity Level</td>
+            <td>This is a self-rated level of physical activity. The levels are:
+                <ul>
+                    <li><code>0</code>: No physical activity</li>
+                    <li><code>1</code>: Light physical activity</li>
+                    <li><code>2</code>: Moderate physical activity</li>
+                    <li><code>3</code>: Heavy physical activity</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Region</td>
+            <td>This represents the region where the patient lives. The values <code>1</code> and <code>2</code> could represent rural and urban areas, respectively.</td>
+        </tr>
+        <tr>
+            <td>Smoking Status</td>
+            <td>This indicates the smoking status of the patient. The values are:
+                <ul>
+                    <li><code>0</code>: Non-smoker</li>
+                    <li><code>1</code>: Former smoker</li>
+                    <li><code>2</code>: Smoker</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Alcohol Consumption</td>
+            <td>This indicates whether the patient consumes alcohol. The values are:
+                <ul>
+                    <li><code>0</code>: Non-drinker</li>
+                    <li><code>1</code>: Occasional drinker</li>
+                    <li><code>2</code>: Regular drinker</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Fasting Insulin (µU/mL)</td>
+            <td>This is a measure of the amount of insulin in the bloodstream after an overnight fast. A normal fasting insulin level ranges from 50 to 200 µU/mL.</td>
+        </tr>
+    </table>
+    <h1>Diabetes Prediction</h1>
+    <form action="/predict" method="post">
+        <input type="float" name="age" placeholder="Age" required>
+        <input type="float" name="gender" placeholder="Gender" required>
+        <input type="float" name="bmi" placeholder="BMI" required>
+        <input type="float" name="glucose" placeholder="Blood Glucose (mg/dL)" required>
+        <input type="float" name="hba1c" placeholder="HbA1c (%)" required>
+        <input type="float" name="systolic_bp" placeholder="Systolic BP (mmHg)" required>
+        <input type="float" name="diastolic_bp" placeholder="Diastolic BP (mmHg)" required>
+        <input type="int" name="family_history" placeholder="Family History of Diabetes" required>
+        <input type="int" name="physical_activity" placeholder="Physical Activity Level" required>
+        <input type="int" name="region" placeholder="Region" required>
+        <input type="int" name="smoking_status" placeholder="Smoking Status" required>
+        <input type="int" name="alcohol_consumption" placeholder="Alcohol Consumption" required>
+        <input type="int" name="fasting_insulin" placeholder="Fasting Insulin (µU/mL)" required>
+        <button type="submit">Predict</button>
+    </form>
+</body>
+</html>
