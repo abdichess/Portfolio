@@ -66,7 +66,6 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Acknowledgments
 
-- The dataset used to train the machine learning model was obtained from [source].
 - The Flask framework was used to build the web application.
 
 ## Contact
